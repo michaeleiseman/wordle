@@ -1,0 +1,159 @@
+* {
+    box-sizing: border-box;
+}
+#layout {
+    display: grid;
+    /* grid-template-columns: max-content 1fr;
+    grid-template-areas:
+        "gd ld"
+        "ky ky"; */
+    grid-template-columns: 1fr;
+    grid-template-areas: 
+        "ld"
+        "gd"
+        "ky";
+    gap: 20px;
+    max-width: 500px;
+    margin:auto
+}
+.input {
+    width: 40px;
+    height: 45px;
+    border-style: solid;
+    border-color: black;
+    border-width: 2px;
+    text-align: center;
+    font-size: 36px;
+    font-family: sans-serif
+}
+.selected {
+    border-color: red;
+    border-width: 5px;
+}
+.entered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.white {
+    color: white
+}
+.black {
+    color: black
+}
+.correct {
+    background-color: #6aaa64;
+}
+.wrong {
+    background-color: #787c7e;
+}
+.goodLetter {
+    background-color: #c9b458;
+}
+#enter, #playAgain {
+    border-radius: 10px;
+    font-size: 18px;
+}
+.enabled {
+    background-color: black;
+    color: white;
+}
+.disabled {
+    background-color: gray;
+    color: black;
+    
+}
+#grid {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 5px;
+    grid-area: gd;
+    width: fit-content
+}
+.row {
+    display: inline-flex;
+    gap: 10px;
+    align-content:stretch;
+    width: fit-content
+}
+#keyboard {
+    grid-area: ky
+}
+#legend {
+    display: inline-flex;
+    align-items: stretch;
+    gap: 10px;
+    grid-area: ld;
+}
+.swatch {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}
+.description {
+    color: white;
+    font-weight: bold;
+    font-family: sans-serif;
+    padding: 10px;
+    text-align: center;
+}
+.typeRow {
+    display: flex;
+    gap: 3px;
+    margin-bottom: 10px;
+}
+#middleRow {
+    margin-left: 10px;
+}
+#bottomRow {
+    margin-left: 20px;
+}
+.key{
+    text-align: center;
+    font-size: 12px;
+    font-family: sans-serif;
+    border-style: solid;
+    border-width: 2px;
+    border-color: black;
+    height: 40px;
+    width: 30px;
+    border-radius: 5px;
+    padding-top: 12px;
+
+    cursor: pointer
+}
+#delete {
+    text-align: center;
+    font-size: 12px;
+    font-family: sans-serif;
+    border-style: solid;
+    border-width: 2px;
+    border-color: black;
+    height: 40px;
+    width: 75px;
+    border-radius: 5px;
+    padding-top: 12px;
+
+    cursor: pointer
+}
+#answer {
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+    margin-top: 0px
+}
+@media(min-width:600px) {
+    #layout {
+        grid-template-columns: max-content 1fr;
+        grid-template-areas:
+        "gd ld"
+        "ky ky";
+    }
+    #legend {
+        display: inline-flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+}
