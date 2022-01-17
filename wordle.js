@@ -117,6 +117,7 @@ for(let i = 0; i < document.getElementsByClassName("row").length; i++) {
             }
         },
         evaluate: function() {
+            focusSquare.deselect();
             //find which inputs are correct
             const correct = [];
             const wordArray = [{
@@ -188,7 +189,6 @@ function initialize(thisIsNotTheFirstGame) {
     }
     //pick a random word
     word = wordList[Math.floor(wordList.length * Math.random())];
-    // document.getElementsByTagName("p")[0].textContent = word;
     for(const row of rows) {
         row.inputs = [];
     }
