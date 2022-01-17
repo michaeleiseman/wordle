@@ -211,8 +211,15 @@ function selectInput(event) {
     event.target.inputObject.select();
 }
 function deleteEntry() {
-    focusSquare.element.textContent = "";
-    focusSquare.letter = false;
+    if(focusSquare !== enter && focusSquare !== playAgain) {
+        focusSquare.element.textContent = "";
+        focusSquare.letter = false;
+        const inputsNotMarkedCorrect = focusSquare.row.inputs.filter(input => input.isActive());
+        if(focusSquare.row.isValid()) {
+            enter.enable();
+        }
+        advance(true, inputsNotMarkedCorrect);
+    }
 }
 function letterEntry(event) {
     event.preventDefault();
@@ -245,6 +252,12 @@ function letterEntry(event) {
     }
     if(code === "Backspace" || code === "Delete") {
         focusSquare.element.textContent = "";
+        advance(true, inputsNotMarkedCorrect);
+        if(focusSquare.row.isValid()) {
+            enter.enable();
+        } else {
+            enter.disable();
+        }
         return;
     }
     //if the user didn't press a letter don't do anything. This code also prevents code.length from begin less than 4 so that the next condition works more reliably.
@@ -272,8 +285,10 @@ function advance(movingBackward, inputs) {
         }
         if(focusSquare !== inputs[0]) {
             inputs[inputs.indexOf(focusSquare) - 1].select();
-        } else {
+        } else if (focusSquare.row.isValid()) {
             enter.select();
+        } else {
+            inputs[inputs.length - 1].select();
         }
     } else {
         //if we are currently at the right-most input in the row and all of the inputs are filled in
