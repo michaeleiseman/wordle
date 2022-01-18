@@ -188,7 +188,7 @@ function initialize(thisIsNotTheFirstGame) {
         }
     }
     //pick a random word
-    word = wordList[Math.floor(wordList.length * Math.random())];
+    word = wordList.splice(Math.floor(wordList.length * Math.random()), 1)[0];
     for(const row of rows) {
         row.inputs = [];
     }
@@ -244,20 +244,28 @@ function letterEntry(event) {
         return;
     }
     if(code === "ArrowLeft") {
-        advance(true, inputsNotMarkedCorrect);
+        if(focusSquare !== inputsNotMarkedCorrect[0]) {
+            advance(true, inputsNotMarkedCorrect);
+        }
         return;
     }
     if(focusSquare === enter || focusSquare === playAgain) {
         return;
     }
     if(code === "Backspace" || code === "Delete") {
+        const enterIsEnabled = focusSquare.row.isValid();
         focusSquare.element.textContent = "";
-        advance(true, inputsNotMarkedCorrect);
-        if(focusSquare.row.isValid()) {
-            enter.enable();
-        } else {
+        if(focusSquare !== inputsNotMarkedCorrect[0]) {
+            advance(true, inputsNotMarkedCorrect);
+        }
+        // if(focusSquare.row.isValid()) {
+        //     enter.enable();
+        // } else {
+        if(enterIsEnabled) {
             enter.disable();
         }
+            
+        // }
         return;
     }
     //if the user didn't press a letter don't do anything. This code also prevents code.length from begin less than 4 so that the next condition works more reliably.
