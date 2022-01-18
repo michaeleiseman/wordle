@@ -212,13 +212,17 @@ function selectInput(event) {
 }
 function deleteEntry() {
     if(focusSquare !== enter && focusSquare !== playAgain) {
+        const enterIsEnabled = focusSquare.row.isValid();
         focusSquare.element.textContent = "";
         focusSquare.letter = false;
         const inputsNotMarkedCorrect = focusSquare.row.inputs.filter(input => input.isActive());
-        if(focusSquare.row.isValid()) {
-            enter.enable();
+        if(enterIsEnabled) {
+            enter.disable();
         }
-        advance(true, inputsNotMarkedCorrect);
+        if(focusSquare !== inputsNotMarkedCorrect[0]) {
+            advance(true, inputsNotMarkedCorrect);
+        }
+        
     }
 }
 function letterEntry(event) {
@@ -258,14 +262,9 @@ function letterEntry(event) {
         if(focusSquare !== inputsNotMarkedCorrect[0]) {
             advance(true, inputsNotMarkedCorrect);
         }
-        // if(focusSquare.row.isValid()) {
-        //     enter.enable();
-        // } else {
         if(enterIsEnabled) {
             enter.disable();
         }
-            
-        // }
         return;
     }
     //if the user didn't press a letter don't do anything. This code also prevents code.length from begin less than 4 so that the next condition works more reliably.
