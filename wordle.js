@@ -217,6 +217,8 @@ function deleteEntry() {
         const inputsNotMarkedCorrect = focusSquare.row.inputs.filter(input => input.isActive());
         if(focusSquare.row.isValid()) {
             enter.enable();
+        } else {
+            enter.disable();
         }
         advance(true, inputsNotMarkedCorrect);
     }
@@ -305,8 +307,6 @@ function advance(movingBackward, inputs) {
             inputs[0].select();
         }
     }
-    
-    
 }
 function evaluateGuess() {
     const correct = enter.row.evaluate();
